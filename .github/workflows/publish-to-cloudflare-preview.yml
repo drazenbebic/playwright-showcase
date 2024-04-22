@@ -11,7 +11,7 @@ jobs:
     permissions:
       contents: read
       deployments: write
-    name: "Publish to Cloudflare Pages (Preview)"
+    name: "Publish to Cloudflare Pages (Preview) & Run E2E Tests"
     steps:
       - uses: actions/checkout@v4
       - name: 'Setup node & cache'
@@ -34,22 +34,19 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: playwright-showcase
           directory: dist
-          # Optional: Enable this if you want to have GitHub Deployments triggered
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          # Optional: Switch what branch you are publishing to.
-          # By default this will be the branch which triggered this workflow
-          # branch: main
-          # Optional: Change the working directory
-          # workingDirectory: my-site
-          # Optional: Change the Wrangler version, allows you to point to a specific version or a tag such as `beta`
           wranglerVersion: '3'
-      - name: 'Access Deployment URL'
-        run: echo "Deployment URL - ${{ steps.deploy.outputs.url }}"
-  playwright:
-    needs: [ 'publish' ]
-    name: 'Run Playwright Tests'
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Access Deployment URL'
-        run: echo "Deployment URL - ${{ steps.deploy.outputs.url }}"
+      - name: 'Run Playwright tests'
+        env:
+          PLAYWRIGHT_BASE_URL: ${{ steps.deploy.outputs.url }}
+          PLAYWRIGHT_SERVICE_URL: ${{ secrets.PLAYWRIGHT_SERVICE_URL }}
+          PLAYWRIGHT_SERVICE_ACCESS_TOKEN: ${{ secrets.PLAYWRIGHT_SERVICE_ACCESS_TOKEN }}
+          PLAYWRIGHT_SERVICE_RUN_ID: ${{ github.run_id }}-${{ github.run_attempt }}-${{ github.sha }}
+        run: yarn playwright:run --config=playwright.service.config.ts --workers=50
+      - name: 'Save Test Reports'
+        uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: playwright-report
+          path: __tests__/report
+          retention-days: 30
