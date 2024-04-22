@@ -1,13 +1,18 @@
+import useStore from '../../store';
 import * as Ariakit from '@ariakit/react';
+import { Button, TextInput, Label } from '@primer/react'
+
+import styles from './AddParticipantForm.module.scss';
 
 const AddParticipantForm = () => {
   const form = Ariakit.useFormStore({ defaultValues: { name: '', email: '' } });
+  const addObject = useStore((state: any) => state.addObject);
 
   form.useSubmit(async (state) => {
     const values = state.values;
     const { email, name } = values;
 
-    localStorage.setItem('participants', JSON.stringify({ email, name }));
+    addObject({email, name});
   });
 
   return (
@@ -20,8 +25,9 @@ const AddParticipantForm = () => {
         Add new participant
       </h2>
       <div className="field">
-        <Ariakit.FormLabel name={form.names.name}>Name</Ariakit.FormLabel>
-        <Ariakit.FormInput
+        <Label>Name</Label>
+        <TextInput
+          as={Ariakit.FormInput}
           name={form.names.name}
           placeholder="John Doe"
           className="input"
@@ -30,8 +36,9 @@ const AddParticipantForm = () => {
         <Ariakit.FormError name={form.names.name} className="error" />
       </div>
       <div className="field">
-        <Ariakit.FormLabel name={form.names.email}>Email</Ariakit.FormLabel>
-        <Ariakit.FormInput
+        <Label>Email</Label>
+        <TextInput
+          as={Ariakit.FormInput}
           type="text"
           name={form.names.email}
           placeholder="johndoe@example.com"
@@ -40,11 +47,13 @@ const AddParticipantForm = () => {
         />
         <Ariakit.FormError name={form.names.email} className="error" />
       </div>
-      <div className="buttons">
-        <Ariakit.FormReset className="button secondary reset">
+      <div className={styles.actionsWrapper}>
+        <Button onClick={() => form.reset()} className={styles.button}>
           Reset
-        </Ariakit.FormReset>
-        <Ariakit.FormSubmit className="button">Add</Ariakit.FormSubmit>
+        </Button>
+        <Button onClick={() => form.submit()} className={styles.button}>
+          Add
+        </Button>
       </div>
     </Ariakit.Form>
   );
