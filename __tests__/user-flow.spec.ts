@@ -1,13 +1,13 @@
 import { test } from '@playwright/test';
 
-test('A new user registers', async ({
+test('Submit "Add new participant" form', async ({
   page,
 }) => {
-  await page.goto('/sign-up');
+  await page.goto('/');
 });
 
-test('An existing user logs in', async ({
+test('Reset "Add new participant" form data', async ({
   page,
 }) => {
-  await page.goto('/sign-in');
+  await page.goto('/');
 });
