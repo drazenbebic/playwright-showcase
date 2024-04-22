@@ -27,6 +27,7 @@ jobs:
       - name: 'Build the application'
         run: yarn build
       - name: 'Publish to Cloudflare Pages (Preview)'
+        id: deploy
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
