@@ -46,6 +46,7 @@ jobs:
       - name: 'Access Deployment URL'
         run: echo "Deployment URL - ${{ steps.deploy.outputs.url }}"
   playwright:
+    needs: [ 'publish' ]
     name: 'Run Playwright Tests'
     timeout-minutes: 60
     runs-on: ubuntu-latest
