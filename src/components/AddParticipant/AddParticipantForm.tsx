@@ -1,5 +1,4 @@
 import * as Ariakit from '@ariakit/react';
-import styles from './AddParticipantForm.module.scss';
 
 const AddParticipantForm = () => {
   const form = Ariakit.useFormStore({ defaultValues: { name: '', email: '' } });
