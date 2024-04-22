@@ -15,10 +15,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18.18.1'
-          yarn-version: '4.0.2'
           cache: 'yarn'
       - name: 'Install dependencies'
-        run: yarn --frozen-lockfile
+        run: |
+          yarn policies set-version
+          yarn set version 4.0.2
+          yarn --frozen-lockfile
       - name: 'Run Playwright tests'
         env:
           PLAYWRIGHT_SERVICE_URL: ${{ secrets.PLAYWRIGHT_SERVICE_URL }}
