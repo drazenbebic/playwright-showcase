@@ -1,4 +1,5 @@
 name: 'Publish to CloudFlare Pages'
+
 on:
   push:
     branches:
