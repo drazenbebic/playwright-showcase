@@ -45,3 +45,10 @@ jobs:
           wranglerVersion: '3'
       - name: 'Access Deployment URL'
         run: echo "Deployment URL - ${{ steps.deploy.outputs.url }}"
+  playwright:
+    name: 'Run Playwright Tests'
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Access Deployment URL'
+        run: echo "Deployment URL - ${{ steps.deploy.outputs.url }}"
