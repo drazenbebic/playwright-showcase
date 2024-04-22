@@ -1,0 +1,44 @@
+name: 'Publish to CloudFlare Pages'
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    name: "Publish to Cloudflare Pages"
+    steps:
+      - uses: actions/checkout@v4
+      - name: 'Setup node & cache'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.18.1'
+          cache: 'yarn'
+      - name: 'Install dependencies'
+        run: |
+          yarn policies set-version
+          yarn set version 4.0.2
+          yarn --frozen-lockfile
+      - name: 'Build the application'
+        run: yarn build
+      - name: 'Publish to Cloudflare Pages'
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: playwright-showcase
+          directory: dist
+          # Optional: Enable this if you want to have GitHub Deployments triggered
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          # Optional: Switch what branch you are publishing to.
+          # By default this will be the branch which triggered this workflow
+          branch: main
+          # Optional: Change the working directory
+          # workingDirectory: my-site
+          # Optional: Change the Wrangler version, allows you to point to a specific version or a tag such as `beta`
+          wranglerVersion: '3'

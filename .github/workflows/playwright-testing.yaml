@@ -1,9 +1,11 @@
 name: 'Run Playwright Tests'
+
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+  workflow_run:
+    workflows: [ 'Publish to CloudFlare Pages' ]
+    types:
+      - completed
+
 jobs:
   playwright:
     name: 'Run Playwright Tests'
