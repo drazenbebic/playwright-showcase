@@ -46,7 +46,7 @@ const AddParticipantForm = () => {
               <Ariakit.FormInput
                 render={<TextInput required />}
                 name={form.names.name}
-                placeholder="John Doe"
+                placeholder="Jane Doe"
                 className={styles.formField}
                 required
               />
@@ -61,7 +61,7 @@ const AddParticipantForm = () => {
                 render={<TextInput required />}
                 type="email"
                 name={form.names.email}
-                placeholder="johndoe@example.com"
+                placeholder="janedoe@example.com"
                 className={styles.formField}
                 required
               />
