@@ -8,14 +8,15 @@ import styles from './AddParticipantForm.module.scss';
 const AddParticipantForm = () => {
   const form = Ariakit.useFormStore({ defaultValues: { name: '', email: '' } });
   const addObject = useStore((state: StoreState) => state.addObject);
+  const participantsList = useStore((state: StoreState) => state.data);
   const clearAllParticipants = useStore((state: StoreState) => state.clearData);
 
   form.useSubmit(async (state) => {
     const values = state.values;
-    const { email, name }: Participant = values;
+    const { email, name } = values;
+    const participant: Participant = {id: participantsList.length + 1, email, name} 
 
-    console.log(values);
-    addObject({ email, name });
+    addObject(participant);
   });
 
   return (
