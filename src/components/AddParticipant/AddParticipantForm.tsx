@@ -14,7 +14,7 @@ const AddParticipantForm = () => {
   form.useSubmit(async (state) => {
     const values = state.values;
     const { email, name } = values;
-    const participant: Participant = {id: participantsList.length + 1, email, name} 
+    const participant: Participant = {id: `${participantsList.length + 1}`, email, name} 
 
     addObject(participant);
   });
