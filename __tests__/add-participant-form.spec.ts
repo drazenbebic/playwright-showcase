@@ -27,7 +27,7 @@ test('Reset "Add new participant" form data', async ({
   await page.getByLabel('E-Mail').fill('drazen.bebic@moonshiner.at');
 
   // Now we reset the form.
-  await page.getByRole('button', { name: 'Reset' }).click();
+  await page.locator('button[type="reset"]').click();
 
   // After resetting the form, it clears out so these should be empty.
   await expect(page.getByLabel('Name')).toHaveValue('');
