@@ -4,7 +4,7 @@ import { defineConfig, devices } from "@playwright/test";
 import dotenv from "dotenv";
 import { env } from "process";
 
-dotenv.config({ path: '../../.env' });
+dotenv.config({ path: './.env' });
 
 const config = defineConfig({
   timeout: 60000,
