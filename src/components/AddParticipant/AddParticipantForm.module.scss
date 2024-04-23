@@ -5,13 +5,14 @@
 }
 
 .actionsWrapper {
+  margin-top: 2rem;
 }
 
 .button {
   margin-bottom: 1rem;
 }
 
-.addParticipantButton {
+.block {
   width: 100%;
 }
 
@@ -19,8 +20,18 @@
   background: red;  
 }
 
+.field {
+  margin-bottom: 1rem;
+}
+
 .formField {
   width: 100%;
   margin-top: 0.4rem;
-  margin-bottom: 1rem;
+}
+
+.error {
+  color: #c80000;
+  font-weight: 500;
+  font-size: .75rem;
+  margin-top: .25rem;
 }
