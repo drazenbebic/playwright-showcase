@@ -5,7 +5,7 @@ import './App.css'
 
 function App() {
   const data = useStore((state: any) => state.data);
-  console.log(data, 'zustand');
+  console.log(data, 'participants');
 
   return (
     <ThemeProvider>

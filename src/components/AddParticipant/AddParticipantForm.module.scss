@@ -1,5 +1,26 @@
+.formFieldsWrapper {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
 .actionsWrapper {
-  display: flex;
-  gap: 2rem;
-  padding: 1rem;
+}
+
+.button {
+  margin-bottom: 1rem;
+}
+
+.addParticipantButton {
+  width: 100%;
+}
+
+.dangerButton {
+  background: red;  
+}
+
+.formField {
+  width: 100%;
+  margin-top: 0.4rem;
+  margin-bottom: 1rem;
 }
