@@ -1,8 +1,22 @@
 import create from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware'
 
+export interface Participant {
+  name: string;
+  email: string;
+}
 
-const useStore = create(persist((set) => ({
+export interface StoreState {
+  data: Participant[];
+  addObject: (object: Participant) => void;
+  removeObjectByIndex: (index: number) => void;
+  removeObjectById: (id: string) => void;
+  updateObjectByIndex: (index: number, updatedObject: Participant) => void;
+  updateObjectById: (id: string, updatedObject: Participant) => void;
+  clearData: () => void;
+}
+
+const useStore = create(persist<StoreState>((set) => ({
   data: [],
 
   addObject: (object) => set((state) => ({ data: [...state.data, object] })),

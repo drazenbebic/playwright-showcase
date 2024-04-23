@@ -1,4 +1,4 @@
-import useStore from '../../store';
+import useStore, { Participant, StoreState } from '../../store';
 import * as Ariakit from '@ariakit/react';
 import { Button, FormControl, TextInput, Heading } from '@primer/react'
 import classNames from 'classnames';
@@ -7,15 +7,15 @@ import styles from './AddParticipantForm.module.scss';
 
 const AddParticipantForm = () => {
   const form = Ariakit.useFormStore({ defaultValues: { name: '', email: '' } });
-  const addObject = useStore((state: any) => state.addObject);
-  const clearAllParticipants = useStore((state: any) => state.clearData);
+  const addObject = useStore((state: StoreState) => state.addObject);
+  const clearAllParticipants = useStore((state: StoreState) => state.clearData);
 
   form.useSubmit(async (state) => {
     const values = state.values;
-    const { email, name } = values;
+    const { email, name }: Participant = values;
 
     console.log(values);
-    addObject({email, name});
+    addObject({ email, name });
   });
 
   return (
