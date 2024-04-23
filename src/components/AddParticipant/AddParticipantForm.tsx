@@ -77,12 +77,6 @@ const AddParticipantForm = () => {
                 </Button>
               }
             />
-            <Ariakit.FormReset
-              store={form}
-              render={
-                <Button className={classNames(styles.button)}>Reset</Button>
-              }
-            />
             <Button onClick={() => clearAllParticipants()} className={classNames(styles.button, styles.dangerButton)}>
               Reset all participants
             </Button>
